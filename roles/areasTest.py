@@ -30,7 +30,7 @@ def test_obtener_areas():
     try:
         token = obtenerToken()
         headers = {"Authorization": f"Bearer {token}"}
-        response = requests.get(f"{URL_BASE}/arearoles", headers=headers, params=LISTADO)
+        response = requests.get(f"{URL_BASE}/rolecategories", headers=headers, params=LISTADO)
         response.raise_for_status()
         datos = response.json()
         assert response.status_code == 200
@@ -44,7 +44,7 @@ def crear_area():
     try:
         token = obtenerToken()
         headers = {"Authorization": f"Bearer {token}"}
-        response = requests.post(f"{URL_BASE}/arearoles", json=AREA, headers=headers)
+        response = requests.post(f"{URL_BASE}/rolecategories", json=AREA, headers=headers)
         response.raise_for_status()
         datos = response.json()
         assert response.status_code == 200
@@ -57,7 +57,7 @@ def test_buscar_area(crear_area):
     try:
         token = obtenerToken()
         headers = {"Authorization": f"Bearer {token}"}
-        response = requests.get(f"{URL_BASE}/arearoles/{crear_area}", headers=headers)
+        response = requests.get(f"{URL_BASE}/rolecategories/{crear_area}", headers=headers)
         response.raise_for_status()
         datos = response.json()
         assert response.status_code == 200
@@ -70,7 +70,7 @@ def test_editar_area(crear_area):
     try:
         token = obtenerToken()
         headers = {"Authorization": f"Bearer {token}"}
-        response = requests.put(f"{URL_BASE}/arearoles/{crear_area}", json=AREA_EDITADA, headers=headers)
+        response = requests.put(f"{URL_BASE}/rolecategories/{crear_area}", json=AREA_EDITADA, headers=headers)
         response.raise_for_status()
         datos = response.json()
         assert response.status_code == 200
@@ -84,7 +84,7 @@ def test_eliminar_area(crear_area):
     try:
         token = obtenerToken()
         headers = {"Authorization": f"Bearer {token}"}
-        response = requests.delete(f"{URL_BASE}/arearoles/{crear_area}", headers=headers)
+        response = requests.delete(f"{URL_BASE}/rolecategories/{crear_area}", headers=headers)
         response.raise_for_status()
         datos = response.json()
         assert response.status_code == 200
