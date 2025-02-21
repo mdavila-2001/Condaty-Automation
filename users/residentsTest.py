@@ -19,6 +19,7 @@ RESIDENTE_A_CREAR = {
     "phone": "77441122",
     "address": fake.address(),
     "birthday": str(fake.date_of_birth()),
+    "gender": fake.random_element(elements=("M", "F")),
     "email": fake.email(),
     "preunidad": "1",
     "client_id": 1
