@@ -68,6 +68,17 @@ def test_listar_dptos_con_titulares():
     except requests.exceptions.HTTPError as e:
         pytest.fail(f"listar_dptos_con_propietarios: Prueba fallida - {e}")
 
+@pytest.fixture(scope="module")
+def crear_dpto():
+    token = obtenerToken()
+    headers = {"Authorization": f"Bearer {token}"}
+    response = requests.post(f"{URL_BASE}/dptos", json=DPTO_A_CREAR, headers=headers)
+    response.raise_for_status()
+    datos = response.json()
+    assert datos['message'] == "Registro creado con éxito", "El departamento falló al crearse"
+    print(f"Departamento creado con ID: {datos['data']}")
+    return datos['data']
+
 def test_listar_dptos_sin_titulares():
     try:
         token = obtenerToken()
@@ -80,17 +91,6 @@ def test_listar_dptos_sin_titulares():
         print(json.dumps(datos['data'], indent=4))
     except requests.exceptions.HTTPError as e:
         pytest.fail(f"listar_dptos_sin_propietarios: Prueba fallida - {e}")
-
-@pytest.fixture(scope="module")
-def crear_dpto():
-    token = obtenerToken()
-    headers = {"Authorization": f"Bearer {token}"}
-    response = requests.post(f"{URL_BASE}/dptos", json=DPTO_A_CREAR, headers=headers)
-    response.raise_for_status()
-    datos = response.json()
-    assert datos['message'] == "Registro creado con éxito", "El departamento falló al crearse"
-    print(f"Departamento creado con ID: {datos['data']}")
-    return datos['data']
 
 def test_llamar_dpto(crear_dpto):
     try:
