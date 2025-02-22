@@ -43,7 +43,7 @@ def test_listar_guardias():
     try:
         token = obtenerToken()
         headers = {"Authorization": f"Bearer {token}"}
-        response = requests.get(f"{URL_BASE}/guard", headers=headers, params=LISTADO)
+        response = requests.get(f"{URL_BASE}/guards", headers=headers, params=LISTADO)
         response.raise_for_status()
         assert response.status_code == 200
         datos = response.json()
@@ -59,7 +59,7 @@ def test_listar_guardias():
 def crear_guardia():
     token = obtenerToken()
     headers = {"Authorization": f"Bearer {token}"}
-    response = requests.post(f"{URL_BASE}/guard", headers=headers, json=GUARDIA_A_CREAR)
+    response = requests.post(f"{URL_BASE}/guards", headers=headers, json=GUARDIA_A_CREAR)
     response.raise_for_status()
     datos = response.json()
     assert datos['message'] == "Registro creado con éxito", "El guardia falló al crearse"
@@ -70,7 +70,7 @@ def test_llamar_guardia(crear_guardia):
     try:
         token = obtenerToken()
         headers = {"Authorization": f"Bearer {token}"}
-        response = requests.get(f"{URL_BASE}/guard/{crear_guardia}", headers=headers)
+        response = requests.get(f"{URL_BASE}/guards/{crear_guardia}", headers=headers)
         response.raise_for_status()
         datos = response.json()
         assert datos['message'] == "Show", "El guardia no fue localizado"
@@ -83,7 +83,7 @@ def test_editar_guardia(crear_guardia):
     try:
         token = obtenerToken()
         headers = {"Authorization": f"Bearer {token}"}
-        response = requests.put(f"{URL_BASE}/guard/{crear_guardia}", headers=headers, json=GUARDIA_A_ACTUALIZAR)
+        response = requests.put(f"{URL_BASE}/guards/{crear_guardia}", headers=headers, json=GUARDIA_A_ACTUALIZAR)
         response.raise_for_status()
         datos = response.json()
         assert datos['message'] == "Registro actualizado con éxito", "El guardia falló al actualizarse"
@@ -96,7 +96,7 @@ def test_eliminar_guardia(crear_guardia):
     try:
         token = obtenerToken()
         headers = {"Authorization": f"Bearer {token}"}
-        response = requests.delete(f"{URL_BASE}/guard/{crear_guardia}", headers=headers)
+        response = requests.delete(f"{URL_BASE}/guards/{crear_guardia}", headers=headers)
         response.raise_for_status()
         datos = response.json()
         assert response.status_code == 200

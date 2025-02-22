@@ -45,7 +45,7 @@ def test_listar_propietario():
     try:
         token = obtenerToken()
         headers = {"Authorization": f"Bearer {token}"}
-        response = requests.get(f"{URL_BASE}/owner", headers=headers, params=LISTADO)
+        response = requests.get(f"{URL_BASE}/owners", headers=headers, params=LISTADO)
         response.raise_for_status()
         datos = response.json()
         assert "message" in datos, "La respuesta no contiene la clave 'message'"
@@ -60,7 +60,7 @@ def crear_propietario():
     token = obtenerToken()
     try:
         headers = {"Authorization": f"Bearer {token}"}
-        response = requests.post(f"{URL_BASE}/owner", json=RESIDENTE_A_CREAR, headers=headers)
+        response = requests.post(f"{URL_BASE}/owners", json=RESIDENTE_A_CREAR, headers=headers)
         response.raise_for_status()
         datos = response.json()
         assert datos['message'] == "Registro creado con éxito", "El usuario falló al crearse"
@@ -74,7 +74,7 @@ def test_llamar_propietario(crear_propietario):
         token = obtenerToken()
         params = {"fullType": "DET", "searchBy": crear_propietario}
         headers = {"Authorization": f"Bearer {token}"}
-        response = requests.get(f"{URL_BASE}/owner", headers=headers, params=params)
+        response = requests.get(f"{URL_BASE}/owners", headers=headers, params=params)
         response.raise_for_status()
         datos = response.json()
         assert "data" in datos, "La respuesta no pudo traer los datos del usuario"
@@ -87,7 +87,7 @@ def test_actualizar_propietario(crear_propietario):
     try:
         token = obtenerToken()
         headers = {"Authorization": f"Bearer {token}"}
-        response = requests.put(f"{URL_BASE}/owner/{crear_propietario}", json=RESIDENTE_A_ACTUALIZAR, headers=headers)
+        response = requests.put(f"{URL_BASE}/owners/{crear_propietario}", json=RESIDENTE_A_ACTUALIZAR, headers=headers)
         print(f"{URL_BASE}/users/{crear_propietario}")
         response.raise_for_status()
         datos = response.json()
@@ -102,7 +102,7 @@ def test_eliminar_propietario(crear_propietario):
     try:
         token = obtenerToken()
         headers = {"Authorization": f"Bearer {token}"}
-        response = requests.delete(f"{URL_BASE}/owner/{crear_propietario}", headers=headers)
+        response = requests.delete(f"{URL_BASE}/owners/{crear_propietario}", headers=headers)
         response.raise_for_status()
         datos = response.json()
         assert datos['message'] == "Registro eliminado con éxito", "El usuario falló al eliminarse"
