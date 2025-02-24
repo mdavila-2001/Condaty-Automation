@@ -12,7 +12,7 @@ URL_BASE = "https://phplaravel-1214481-5270819.cloudwaysapps.com/api"
 LISTADO = {"fullType": "L"}
 
 AREA = {
-    "name": "Ventas"
+    "name": fake.job()
 }
 
 AREA_EDITADA = {
