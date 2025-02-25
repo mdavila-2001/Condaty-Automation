@@ -18,11 +18,13 @@ LISTADO = {
 PERMISO = {
     "name": fake.word(),
     "description": "UsuarioE",
+    "ability_category_id": 2,
 }
 
 PERMISO_EDITADO = {
     "name": fake.word(),
     "description": "Test",
+    "ability_category_id": 2,
 }
 
 def obtenerToken():

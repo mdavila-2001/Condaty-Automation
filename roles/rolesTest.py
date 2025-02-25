@@ -37,7 +37,6 @@ def crear_rol():
         token = obtenerToken()
         headers = {"Authorization": f"Bearer {token}"}
         datos_rol = {
-            "rolecategory_id": 1,
             "name": fake.word(),
             "description": "Rol de prueba",
             "abilities": "test:R|profile:C|roles:R|"
