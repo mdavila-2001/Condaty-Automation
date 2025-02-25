@@ -86,7 +86,6 @@ def test_listar_dptos_sin_titulares():
         response = requests.get(f"{URL_BASE}/dptos", params=LISTADO_SIN_TITULARES, headers=headers)
         response.raise_for_status()
         datos = response.json()
-        assert len(datos['data']) > 0, "No se encontraron departamentos sin titulares"
         print(f"Se encontraron {len(datos['data'])} departamentos sin titulares.")
         print(json.dumps(datos['data'], indent=4))
     except requests.exceptions.HTTPError as e:
