@@ -56,18 +56,6 @@ def test_listar_dptos():
     except requests.exceptions.HTTPError as e:
         pytest.fail(f"listar_dptos: Prueba fallida - {e}")
 
-def test_listar_dptos_con_titulares():
-    try:
-        token = obtenerToken()
-        headers = {"Authorization": f"Bearer {token}"}
-        response = requests.get(f"{URL_BASE}/dptos", params=LISTADO_CON_TITULARES, headers=headers)
-        response.raise_for_status()
-        datos = response.json()
-        print(f"Se encontraron {len(datos['data'])} departamentos con titulares")
-        print(json.dumps(datos['data'], indent=4))
-    except requests.exceptions.HTTPError as e:
-        pytest.fail(f"listar_dptos_con_propietarios: Prueba fallida - {e}")
-
 @pytest.fixture(scope="module")
 def crear_dpto():
     token = obtenerToken()
@@ -78,18 +66,6 @@ def crear_dpto():
     assert datos['message'] == "Registro creado con éxito", "El departamento falló al crearse"
     print(f"Departamento creado con ID: {datos['data']}")
     return datos['data']
-
-def test_listar_dptos_sin_titulares():
-    try:
-        token = obtenerToken()
-        headers = {"Authorization": f"Bearer {token}"}
-        response = requests.get(f"{URL_BASE}/dptos", params=LISTADO_SIN_TITULARES, headers=headers)
-        response.raise_for_status()
-        datos = response.json()
-        print(f"Se encontraron {len(datos['data'])} departamentos sin titulares.")
-        print(json.dumps(datos['data'], indent=4))
-    except requests.exceptions.HTTPError as e:
-        pytest.fail(f"listar_dptos_sin_propietarios: Prueba fallida - {e}")
 
 def test_llamar_dpto(crear_dpto):
     try:
@@ -103,6 +79,32 @@ def test_llamar_dpto(crear_dpto):
         print(json.dumps(datos['data'], indent=4))
     except requests.exceptions.HTTPError as e:
         pytest.fail(f"llamar_dpto: Prueba fallida - {e}")
+
+def test_listar_dptos_con_titulares():
+    try:
+        token = obtenerToken()
+        headers = {"Authorization": f"Bearer {token}"}
+        response = requests.get(f"{URL_BASE}/dptos", params=LISTADO_CON_TITULARES, headers=headers)
+        response.raise_for_status()
+        datos = response.json()
+        assert len(datos['data']) > 0, "No se encontraron departamentos con titulares"
+        print(f"Se encontraron {len(datos['data'])} departamentos con titulares")
+        print(json.dumps(datos['data'], indent=4))
+    except requests.exceptions.HTTPError as e:
+        pytest.fail(f"listar_dptos_con_propietarios: Prueba fallida - {e}")
+
+def test_listar_dptos_sin_titulares():
+    try:
+        token = obtenerToken()
+        headers = {"Authorization": f"Bearer {token}"}
+        response = requests.get(f"{URL_BASE}/dptos", params=LISTADO_SIN_TITULARES, headers=headers)
+        response.raise_for_status()
+        datos = response.json()
+        assert len(datos['data']) > 0, "No se encontraron departamentos sin titulares"
+        print(f"Se encontraron {len(datos['data'])} departamentos sin titulares.")
+        print(json.dumps(datos['data'], indent=4))
+    except requests.exceptions.HTTPError as e:
+        pytest.fail(f"listar_dptos_sin_propietarios: Prueba fallida - {e}")
 
 def test_actualizar_dpto(crear_dpto):
     try:
