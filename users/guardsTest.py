@@ -100,6 +100,6 @@ def test_eliminar_guardia(crear_guardia):
         response.raise_for_status()
         datos = response.json()
         assert response.status_code == 200
-        assert datos['message'] == "Registro eliminado con éxito", "El guardia falló al eliminarse"
+        assert datos['message'] == "Guardia Desvinculado", "El guardia falló al eliminarse"
     except requests.exceptions.HTTPError as e:
         pytest.fail(f"eliminar_guardia: Prueba fallida - {e}")
