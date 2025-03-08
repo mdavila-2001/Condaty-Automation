@@ -105,7 +105,7 @@ def test_eliminar_propietario(crear_propietario):
         response = requests.delete(f"{URL_BASE}/owners/{crear_propietario}", headers=headers)
         response.raise_for_status()
         datos = response.json()
-        assert datos['message'] == "Registro eliminado con éxito", "El usuario falló al eliminarse"
+        assert datos['message'] == "Residente Desvinculado", "El usuario falló al eliminarse"
         print(f"Usuario eliminado con ID: {crear_propietario}")
     except requests.exceptions.HTTPError as e:
         pytest.fail(f"eliminar_usuario: Prueba fallida - {e}")
