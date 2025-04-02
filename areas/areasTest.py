@@ -56,7 +56,7 @@ def crear_area():
         response = requests.post(f"{URL_BASE}/areas", headers=headers, json=AREA_A_CREAR)
         response.raise_for_status()
         datos = response.json()
-        assert datos['message'] == "Registro creado con éxito", "El area falló al crearse"
+        assert datos['message'] == "Registro creado con éxito", "El area falló al crearse correctamente"
         print(f"Area creada con ID: {datos['data']}")
         return datos['data']
     except requests.exceptions.HTTPError as e:
