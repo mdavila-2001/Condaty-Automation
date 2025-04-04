@@ -46,7 +46,7 @@ def test_listar_area():
         print("El GET funciona correctamente")
         print(json.dumps(datos['data'], indent=4))
     except requests.exceptions.HTTPError as e:
-        pytest.fail(f"listar_usuarios: Prueba fallida - {e}")
+        pytest.fail(f"listar_areas: Prueba fallida - {e}")
 
 @pytest.fixture(scope="module")
 def crear_area():
