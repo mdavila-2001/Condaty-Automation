@@ -28,7 +28,7 @@ AREA_A_EDITAR = {
     "title": fake.first_name()
 }
 
-#Token para funciones de CRUD
+#Token para funciones de CRUD con los headers
 def obtenerToken():
     response = requests.post(f"{URL_BASE}/adm-login", json={"email": "123456", "password": "12345678"})
     response.raise_for_status()
