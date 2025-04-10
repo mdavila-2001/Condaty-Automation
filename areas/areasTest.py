@@ -5,7 +5,7 @@ from faker import Faker
 
 fake = Faker('es_ES')
 
-# URL base del backend
+# URL base de la API para realizar las pruebas
 URL_BASE = "https://phplaravel-1214481-5270819.cloudwaysapps.com/api"
 
 #Datos necesarios
